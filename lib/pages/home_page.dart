@@ -45,6 +45,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -180,17 +182,17 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             SizedBox(
-              height: 250,
+              height: size.height * 0.32,
               child: FutureBuilder(
                 future: _client.getProducts(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(child: CircularProgressIndicator());
                   }
-      
+
                   if (snapshot.hasData) {
                     List<Product> products = snapshot.data as List<Product>;
-      
+
                     return ListView.separated(
                       shrinkWrap: true,
                       scrollDirection: Axis.horizontal,
